@@ -1,0 +1,7 @@
+hostname: azure
+domain: example.com
+location: microport
+ip:
+  world: 10.2.0.100
+families:
+  - com.example.mx

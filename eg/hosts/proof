@@ -1,0 +1,8 @@
+hostname: proof
+domain: example.com
+location: microport
+ip:
+  world: 10.2.0.150
+families:
+  - com.example.www
+  - com.example.ns
