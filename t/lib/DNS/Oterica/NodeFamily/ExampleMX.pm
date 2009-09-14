@@ -1,5 +1,5 @@
 package DNS::Oterica::NodeFamily::ExampleMX;
-our $VERSION = '0.092541';
+our $VERSION = '0.092570';
 
 use Moose;
 extends 'DNS::Oterica::NodeFamily';

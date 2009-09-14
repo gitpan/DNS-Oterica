@@ -1,5 +1,5 @@
 package DNS::Oterica::Node::Host;
-our $VERSION = '0.092541';
+our $VERSION = '0.092570';
 
 # ABSTRACT: a host node
 use Moose;
@@ -80,7 +80,7 @@ DNS::Oterica::Node::Host - a host node
 
 =head1 VERSION
 
-version 0.092541
+version 0.092570
 
 =head1 OVERVIEW
 

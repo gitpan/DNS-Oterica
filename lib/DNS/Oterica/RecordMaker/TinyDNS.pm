@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package DNS::Oterica::RecordMaker::TinyDNS;
-our $VERSION = '0.092541';
+our $VERSION = '0.092570';
 
 # ABSTRACT: a tinydns recordmaker for DNSO.
 
@@ -250,7 +250,7 @@ DNS::Oterica::RecordMaker::TinyDNS - a tinydns recordmaker for DNSO.
 
 =head1 VERSION
 
-version 0.092541
+version 0.092570
 
 =head1 DESCRIPTION
 

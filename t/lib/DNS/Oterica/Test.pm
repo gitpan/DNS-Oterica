@@ -1,5 +1,5 @@
 package DNS::Oterica::Test;
-our $VERSION = '0.092541';
+our $VERSION = '0.092570';
 
 use strict;
 use warnings;
@@ -8,7 +8,6 @@ use Carp;
 
 use IPC::System::Simple qw(system capture);
 use DNS::Oterica;
-use Regexp::Common 'net';
 
 my $records = {};
 

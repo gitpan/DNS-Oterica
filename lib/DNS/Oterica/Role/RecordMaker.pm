@@ -1,5 +1,5 @@
 package DNS::Oterica::Role::RecordMaker;
-our $VERSION = '0.092541';
+our $VERSION = '0.092570';
 
 # ABSTRACT: a delegation class for the DNSO recordmaker.
 use Moose::Role;
@@ -26,7 +26,7 @@ DNS::Oterica::Role::RecordMaker - a delegation class for the DNSO recordmaker.
 
 =head1 VERSION
 
-version 0.092541
+version 0.092570
 
 =head1 DESCRIPTION
 

@@ -7,18 +7,19 @@
       "url" : "http://module-build.sourceforge.net/META-spec-v1.4.html"
    },
    "generated_by" : "Dist::Zilla::Plugin::MetaJSON version 1.092400",
-   "version" : "0.092541",
+   "version" : "0.092570",
    "name" : "DNS-Oterica",
    "author" : [
       "Ricardo SIGNES <rjbs@cpan.org>"
    ],
    "license" : "perl",
    "requires" : {
-      "IPC::System::Simple" : "0",
       "File::Find::Rule" : "0",
       "Module::Pluggable" : "0",
       "Net::IP" : "0",
       "YAML::XS" : "0",
+      "IPC::System::Simple" : "0",
+      "autodie" : "0",
       "Moose" : "0",
       "File::Slurp" : "0"
    },
