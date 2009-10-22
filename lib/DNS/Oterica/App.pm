@@ -1,5 +1,6 @@
 package DNS::Oterica::App;
-our $VERSION = '0.092570';
+our $VERSION = '0.092950';
+
 
 # ABSTRACT: the code behind `dnsoterica`
 
@@ -23,7 +24,8 @@ sub BUILD {
     if $self->_has_hub and $arg->{hub_args};
 
   unless ($self->_has_hub) {
-    $self->_set_hub( DNS::Oterica::Hub->new($arg->{hub_args} || {}) );
+    my %args = %{$arg->{hub_args}};
+    $self->_set_hub( DNS::Oterica::Hub->new(\%args || {}) );
   }
 }
 
@@ -32,6 +34,17 @@ has root => (
   is       => 'ro',
   required => 1,
 );
+
+sub populate_locations {
+  my ($self) = @_;
+
+  my $root = $self->root;
+  for my $file (File::Find::Rule->file->in("$root/locations")) {
+    for my $data (YAML::XS::LoadFile($file)) {
+      $self->hub->add_location($data);
+    }
+  }
+}
 
 sub populate_domains {
   my ($self) = @_;
@@ -92,7 +105,6 @@ sub populate_hosts {
 1;
 
 __END__
-
 =pod
 
 =head1 NAME
@@ -101,13 +113,17 @@ DNS::Oterica::App - the code behind `dnsoterica`
 
 =head1 VERSION
 
-version 0.092570
+version 0.092950
 
 =head1 ATTRIBUTES
 
 =head2 hub
 
 This is the L<DNS::Oterica::Hub> into which entries will be loaded.
+
+=cut
+
+=pod
 
 =head2 root
 
@@ -118,7 +134,7 @@ for hosts.
 
 =head1 AUTHOR
 
-  Ricardo SIGNES <rjbs@cpan.org>
+Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -127,6 +143,5 @@ This software is copyright (c) 2009 by Ricardo SIGNES.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=cut 
-
+=cut
 

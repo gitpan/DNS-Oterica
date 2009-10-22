@@ -6,18 +6,26 @@ use lib 'lib'; # XXX: temporary for now -- rjbs, 2009-01-30
 
 use DNS::Oterica::App;
 use File::Find::Rule;
+use Getopt::Long::Descriptive;
 use YAML::XS ();
 
-my $root = $ARGV[0] || 'etc';
-my $app = DNS::Oterica::App->new({ root => $root });
-
-$app->hub->add_location($_) for (
-  { name => 'quonix',      code => '',    network => '208.72.237.0/24', delegated => 1 },
-  { name => 'sd',          code => '',    network => '64.74.157.0/25'  },
-  { name => 'quonix-dmz',  code => 'qx',  network => '192.168.10.0/24' },
-  { name => 'office',      code => ''   },
+my ($opts, $usage) = describe_options(
+  "usage: %c %o <root>",
+  [ 'ns-family=s', 'DNS::Oterica node family for NS records',
+    { required => 1, } ],
+  [ 'hostmaster=s', 'hostmaster email',
+    { required => 1, } ],
 );
 
+my $root = shift @ARGV;
+$usage->die if @ARGV;
+
+my $app = DNS::Oterica::App->new(
+  root          => $root,
+  hub_args      => $opts,
+);
+
+$app->populate_locations;
 $app->populate_domains;
 $app->populate_hosts;
 

@@ -1,7 +1,8 @@
 use strict;
 use warnings;
 package DNS::Oterica::RecordMaker::TinyDNS;
-our $VERSION = '0.092570';
+our $VERSION = '0.092950';
+
 
 # ABSTRACT: a tinydns recordmaker for DNSO.
 
@@ -241,7 +242,6 @@ sub txt {
 1;
 
 __END__
-
 =pod
 
 =head1 NAME
@@ -250,12 +250,16 @@ DNS::Oterica::RecordMaker::TinyDNS - a tinydns recordmaker for DNSO.
 
 =head1 VERSION
 
-version 0.092570
+version 0.092950
 
 =head1 DESCRIPTION
 
 This role provides logic for generating lines for the F<tinydns-data> program
 to consume.
+
+=cut
+
+=pod
 
 =head1 METHODS
 
@@ -264,13 +268,17 @@ to consume.
 Generate an C<=> line, the bread and butter A and PTR record pair for a
 hostname and IP.
 
+=cut
+
+=pod
+
 =head2 ptr
 
 Generate an C<^> line, for the reverse DNS of an IP address.
 
 =head1 AUTHOR
 
-  Ricardo SIGNES <rjbs@cpan.org>
+Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -279,6 +287,5 @@ This software is copyright (c) 2009 by Ricardo SIGNES.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=cut 
-
+=cut
 

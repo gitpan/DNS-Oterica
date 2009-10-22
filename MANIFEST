@@ -12,6 +12,8 @@ eg/hosts/azure
 eg/hosts/dream
 eg/hosts/indigo
 eg/hosts/proof
+eg/locations/megacenter
+eg/locations/microport
 lib/DNS/Oterica.pm
 lib/DNS/Oterica/App.pm
 lib/DNS/Oterica/Hub.pm
@@ -23,7 +25,7 @@ lib/DNS/Oterica/NodeFamily.pm
 lib/DNS/Oterica/RecordMaker/Diagnostic.pm
 lib/DNS/Oterica/RecordMaker/TinyDNS.pm
 lib/DNS/Oterica/Role/RecordMaker.pm
-t/01_basic.t
+t/01-basic.t
 t/compile.t
 t/lib/DNS/Oterica/NodeFamily/ExampleAliasDomain.pm
 t/lib/DNS/Oterica/NodeFamily/ExampleArchiver.pm

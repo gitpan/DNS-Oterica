@@ -1,5 +1,6 @@
 package DNS::Oterica::Test;
-our $VERSION = '0.092570';
+our $VERSION = '0.092950';
+
 
 use strict;
 use warnings;

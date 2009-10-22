@@ -1,5 +1,6 @@
 package DNS::Oterica::Node::Host;
-our $VERSION = '0.092570';
+our $VERSION = '0.092950';
+
 
 # ABSTRACT: a host node
 use Moose;
@@ -71,7 +72,6 @@ no Moose;
 1;
 
 __END__
-
 =pod
 
 =head1 NAME
@@ -80,7 +80,7 @@ DNS::Oterica::Node::Host - a host node
 
 =head1 VERSION
 
-version 0.092570
+version 0.092950
 
 =head1 OVERVIEW
 
@@ -94,9 +94,17 @@ part of a named domain.
 
 This is the name of the host.  B<It does not include the domain name.>
 
+=cut
+
+=pod
+
 =head2 aliases
 
 This is an arrayref of other fully-qualified names that refer to this host.
+
+=cut
+
+=pod
 
 =head2 interfaces
 
@@ -104,9 +112,17 @@ This is an arrayref of pairs, each one an IP address and a location.
 
 This attribute is pretty likely to change later.
 
+=cut
+
+=pod
+
 =head2 location
 
 The name of the network location of this host
+
+=cut
+
+=pod
 
 =head1 METHODS
 
@@ -114,13 +130,17 @@ The name of the network location of this host
 
 The C<world> location IP address for this host.
 
+=cut
+
+=pod
+
 =head2 fqdn
 
 This is the fully-qualified domain name of this host.
 
 =head1 AUTHOR
 
-  Ricardo SIGNES <rjbs@cpan.org>
+Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -129,6 +149,5 @@ This software is copyright (c) 2009 by Ricardo SIGNES.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=cut 
-
+=cut
 

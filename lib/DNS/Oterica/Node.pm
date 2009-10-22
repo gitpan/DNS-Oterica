@@ -1,5 +1,6 @@
 package DNS::Oterica::Node;
-our $VERSION = '0.092570';
+our $VERSION = '0.092950';
+
 
 # ABSTRACT: DNSO node. belongs to families. 
 use Moose;
@@ -54,7 +55,6 @@ no Moose;
 1;
 
 __END__
-
 =pod
 
 =head1 NAME
@@ -63,7 +63,7 @@ DNS::Oterica::Node - DNSO node. belongs to families.
 
 =head1 VERSION
 
-version 0.092570
+version 0.092950
 
 =head1 OVERVIEW
 
@@ -79,9 +79,17 @@ Like other DNS::Oterica objects, they should be created through the hub.
 This is a string representing the domain's domain name, for example
 F<example.com>.
 
+=cut
+
+=pod
+
 =head2 families
 
 This is an arrayref of the families in which the node has been placed.
+
+=cut
+
+=pod
 
 =head2 hub
 
@@ -98,6 +106,10 @@ object or as a name.
 
 If the node is already in the family, nothing happens.
 
+=cut
+
+=pod
+
 =head2 in_node_family
 
   if ($node->in_node_family($family)) { ... }
@@ -105,15 +117,23 @@ If the node is already in the family, nothing happens.
 This method returns true if the node is a member of the named (or passed)
 family and false otherwise.
 
+=cut
+
+=pod
+
 =head2 as_data_lines
 
 This method returns a list of lines of configuration output.
 
 By default, it returns nothing.
 
+=cut
+
+=pod
+
 =head1 AUTHOR
 
-  Ricardo SIGNES <rjbs@cpan.org>
+Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -122,6 +142,5 @@ This software is copyright (c) 2009 by Ricardo SIGNES.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=cut 
-
+=cut
 

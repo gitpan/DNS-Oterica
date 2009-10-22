@@ -1,5 +1,6 @@
 package DNS::Oterica::NodeFamily::ExampleVDom;
-our $VERSION = '0.092570';
+our $VERSION = '0.092950';
+
 
 use Moose;
 extends 'DNS::Oterica::NodeFamily';

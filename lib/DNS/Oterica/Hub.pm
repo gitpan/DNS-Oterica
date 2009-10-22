@@ -1,5 +1,6 @@
 package DNS::Oterica::Hub;
-our $VERSION = '0.092570';
+our $VERSION = '0.092950';
+
 
 # ABSTRACT: the center of control for a DNS::Oterica system
 
@@ -145,7 +146,6 @@ no Moose;
 1;
 
 __END__
-
 =pod
 
 =head1 NAME
@@ -154,13 +154,17 @@ DNS::Oterica::Hub - the center of control for a DNS::Oterica system
 
 =head1 VERSION
 
-version 0.092570
+version 0.092950
 
 =head1 OVERVIEW
 
 The hub is the central collector of DNS::Oterica data.  All new entries are
 given to the hub to collect.  The hub takes care of preventing duplicates and
 keeping data synchronized.
+
+=cut
+
+=pod
 
 =head1 ATTRIBUTES
 
@@ -169,16 +173,23 @@ keeping data synchronized.
 This is the name of the family whose hosts will be used for NS records for
 hosts and in SOA lines.
 
+=cut
+
+=pod
+
 =head2 hostmaster
 
 This is the email address to be used as the contact point in SOA lines.
+
+=cut
+
+=pod
 
 =head1 METHODS
 
 =head2 domain
 
   my $new_domain = $hub->domain($name => \%arg);
-
   my $domain = $hub->domain($name);
 
 This method will return a domain found by name, or if C<\%arg> is given, will
@@ -188,12 +199,20 @@ If no domain is found and C<\%arg> is not given, an exception is raised.
 
 If C<\%arg> is given for a domain that already exists, an exception is raised.
 
+=cut
+
+=pod
+
 =head2 location
 
   my $loc = $hub->location($name);
 
 This method finds the named location and returns it.  If no location for the
 given name is registered, an exception is raised.
+
+=cut
+
+=pod
 
 =head2 add_location
 
@@ -202,13 +221,20 @@ given name is registered, an exception is raised.
 This registers a new location, raising an exception if one already exists for
 the given name.
 
+=cut
+
+=pod
+
 =head2 host
 
   my $host = $hub->host($domain_name, $hostname);
-
   my $new_host = $hub->host($domain_name, $hostname, \%arg);
 
 This method will find or create a host, much like the C<L</domain>> method.
+
+=cut
+
+=pod
 
 =head2 nodes
 
@@ -216,12 +242,20 @@ This method will return a list of all nodes registered with the system.
 
 B<Warning>: at present this will return only hosts.
 
+=cut
+
+=pod
+
 =head2 node_family
 
   my $family = $hub->node_family($family_name);
 
 This method will return the named familiy.  If no such family exists, an
 exception will be raised.
+
+=cut
+
+=pod
 
 =head2 node_families
 
@@ -232,7 +266,7 @@ initialization.)
 
 =head1 AUTHOR
 
-  Ricardo SIGNES <rjbs@cpan.org>
+Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -241,6 +275,5 @@ This software is copyright (c) 2009 by Ricardo SIGNES.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=cut 
-
+=cut
 

@@ -1,5 +1,6 @@
 package DNS::Oterica::Location;
-our $VERSION = '0.092570';
+our $VERSION = '0.092950';
+
 
 # ABSTRACT: a location at which hosts may reside
 use Moose;
@@ -37,7 +38,6 @@ no Moose;
 1;
 
 __END__
-
 =pod
 
 =head1 NAME
@@ -46,7 +46,7 @@ DNS::Oterica::Location - a location at which hosts may reside
 
 =head1 VERSION
 
-version 0.092570
+version 0.092950
 
 =head1 OVERVIEW
 
@@ -61,13 +61,17 @@ Like other DNS::Oterica objects, they should be created through the hub.
 
 This is the location's unique name.
 
+=cut
+
+=pod
+
 =head2 network
 
 This is the C<Net::IP> range for the network at this location.
 
 =head1 AUTHOR
 
-  Ricardo SIGNES <rjbs@cpan.org>
+Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -76,6 +80,5 @@ This software is copyright (c) 2009 by Ricardo SIGNES.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=cut 
-
+=cut
 
