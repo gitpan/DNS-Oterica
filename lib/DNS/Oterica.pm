@@ -1,9 +1,10 @@
 use strict;
 use warnings;
 package DNS::Oterica;
-our $VERSION = '0.092950';
-
-
+BEGIN {
+  $DNS::Oterica::VERSION = '0.100000';
+}
+# ABSTRACT: build dns configuration more easily
 
 
 1;
@@ -13,26 +14,11 @@ __END__
 
 =head1 NAME
 
-DNS::Oterica
+DNS::Oterica - build dns configuration more easily
 
 =head1 VERSION
 
-version 0.092950
-
-=head1 NAME
-
-DNS::Oterica - build dns configuration more easily
-
-=head1 WARNING
-
-B<HIGHLY EXPERIMENTAL>
-
-This code is really not stable yet.  We're using it, and we're going to feel
-free to make incompatible changes to it whenever we want.  Eventually, that
-might change and we will reach a much stabler release cycle.
-
-This code has been released so that you can see what it does, use it
-cautiously, and help guide it toward a stable feature set.
+version 0.100000
 
 =head1 OVERVIEW
 
@@ -55,6 +41,17 @@ Nodes (both hosts and domains) can be parts of families.  Families are groups
 of behavior that nodes perform.  A family object is instantiated for each
 family, and once all nodes have been added to the DNS::Oterica hub, the family
 can emit more configuration.
+
+=head1 WARNING
+
+B<HIGHLY EXPERIMENTAL>
+
+This code is really not stable yet.  We're using it, and we're going to feel
+free to make incompatible changes to it whenever we want.  Eventually, that
+might change and we will reach a much stabler release cycle.
+
+This code has been released so that you can see what it does, use it
+cautiously, and help guide it toward a stable feature set.
 
 =head1 I WANT TO KNOW MORE
 
@@ -81,7 +78,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Ricardo SIGNES.
+This software is copyright (c) 2011 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

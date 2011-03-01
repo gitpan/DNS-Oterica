@@ -1,12 +1,13 @@
 
 
-This archive contains the distribution DNS-Oterica, version
-0.092950:
+This archive contains the distribution DNS-Oterica,
+version 0.100000:
 
-  DNS::Oterica generates DNS records given structured data
+  build dns configuration more easily
 
-This software is copyright (c) 2009 by Ricardo SIGNES.
+This software is copyright (c) 2011 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
 

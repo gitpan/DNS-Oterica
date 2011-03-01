@@ -1,7 +1,4 @@
 package DNS::Oterica::NodeFamily::PostLink;
-our $VERSION = '0.092950';
-
-
 use Moose;
 extends 'DNS::Oterica::NodeFamily';
 

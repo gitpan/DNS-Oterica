@@ -1,7 +1,7 @@
 package DNS::Oterica::Node::Host;
-our $VERSION = '0.092950';
-
-
+BEGIN {
+  $DNS::Oterica::Node::Host::VERSION = '0.100000';
+}
 # ABSTRACT: a host node
 use Moose;
 extends 'DNS::Oterica::Node';
@@ -11,23 +11,30 @@ has hostname => (is => 'ro', isa => 'Str', required => 1);
 
 
 has aliases  => (
-  is => 'ro',
   isa => 'ArrayRef',
-  required   => 1,
-  auto_deref => 1,
-  default    => sub { [] },
+  required => 1,
+  default  => sub { [] },
+  traits   => [ 'Array' ],
+  handles  => {
+    aliases => 'elements',
+  },
 );
 
 
 has interfaces => (
-  is  => 'ro',
   isa => 'ArrayRef',
-  required   => 1,
-  auto_deref => 1,
+  required => 1,
+  traits   => [ 'Array' ],
+  handles  => {
+    interfaces => 'elements',
+  },
 );
 
 
 has location => (is => 'ro', isa => 'Str', required => 1);
+
+
+has ttl => (is => 'ro', isa => 'Int');
 
 
 sub world_ip {
@@ -59,8 +66,19 @@ sub as_data_lines {
     "  families: " . join(q{, }, $self->_family_names)
   );
 
-  push @lines, $self->rec->a_and_ptr({ name => $self->fqdn, node => $self });
-  push @lines, $self->rec->a({ name => $_, node => $self }) for $self->aliases;
+  push @lines, $self->rec->a_and_ptr({
+    name => $self->fqdn,
+    node => $self,
+    ttl  => scalar $self->ttl,
+  });
+
+  for ($self->aliases) {
+    push @lines, $self->rec->a({
+      name => $_,
+      node => $self,
+      ttl  => scalar $self->ttl,
+    });
+  }
 
   push @lines, $self->rec->comment("end host ". $self->fqdn . "\n");
 
@@ -80,7 +98,7 @@ DNS::Oterica::Node::Host - a host node
 
 =head1 VERSION
 
-version 0.092950
+version 0.100000
 
 =head1 OVERVIEW
 
@@ -94,17 +112,11 @@ part of a named domain.
 
 This is the name of the host.  B<It does not include the domain name.>
 
-=cut
-
-=pod
-
 =head2 aliases
 
 This is an arrayref of other fully-qualified names that refer to this host.
 
-=cut
-
-=pod
+The accessor returns a list.
 
 =head2 interfaces
 
@@ -112,27 +124,21 @@ This is an arrayref of pairs, each one an IP address and a location.
 
 This attribute is pretty likely to change later.
 
-=cut
-
-=pod
-
 =head2 location
 
 The name of the network location of this host
 
-=cut
+=head2 ttl
 
-=pod
+This is the default TTL for the host's A records -- it doesn't affect the TTL
+for records created by families to which the host belongs.  If not provided,
+it will be unset, and the default TTL is used.
 
 =head1 METHODS
 
 =head2 world_ip
 
 The C<world> location IP address for this host.
-
-=cut
-
-=pod
 
 =head2 fqdn
 
@@ -144,7 +150,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Ricardo SIGNES.
+This software is copyright (c) 2011 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

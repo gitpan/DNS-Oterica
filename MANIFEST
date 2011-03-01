@@ -1,6 +1,7 @@
 LICENSE
 MANIFEST
 META.json
+META.yml
 Makefile.PL
 README
 bin/dnsoterica
@@ -37,5 +38,4 @@ t/lib/DNS/Oterica/NodeFamily/ExampleWWW.pm
 t/lib/DNS/Oterica/NodeFamily/Jeeves.pm
 t/lib/DNS/Oterica/NodeFamily/PostLink.pm
 t/lib/DNS/Oterica/Test.pm
-t/release-pod-coverage.t
 t/release-pod-syntax.t

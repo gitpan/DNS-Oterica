@@ -1,7 +1,4 @@
 package DNS::Oterica::NodeFamily::Jeeves;
-our $VERSION = '0.092950';
-
-
 use Moose;
 extends 'DNS::Oterica::NodeFamily';
 

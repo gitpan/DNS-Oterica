@@ -1,7 +1,7 @@
 package DNS::Oterica::App;
-our $VERSION = '0.092950';
-
-
+BEGIN {
+  $DNS::Oterica::App::VERSION = '0.100000';
+}
 # ABSTRACT: the code behind `dnsoterica`
 
 use Moose;
@@ -90,6 +90,7 @@ sub populate_hosts {
           interfaces => $interfaces,
           location   => $data->{location},
           aliases    => $data->{aliases} || [],
+          (exists $data->{ttl} ? (ttl => $data->{ttl}) : ()),
         },
       );
 
@@ -113,17 +114,13 @@ DNS::Oterica::App - the code behind `dnsoterica`
 
 =head1 VERSION
 
-version 0.092950
+version 0.100000
 
 =head1 ATTRIBUTES
 
 =head2 hub
 
 This is the L<DNS::Oterica::Hub> into which entries will be loaded.
-
-=cut
-
-=pod
 
 =head2 root
 
@@ -138,7 +135,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Ricardo SIGNES.
+This software is copyright (c) 2011 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

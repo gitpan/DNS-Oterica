@@ -1,13 +1,17 @@
 use strict;
 use warnings;
 package DNS::Oterica::RecordMaker::TinyDNS;
-our $VERSION = '0.092950';
-
-
+BEGIN {
+  $DNS::Oterica::RecordMaker::TinyDNS::VERSION = '0.100000';
+}
 # ABSTRACT: a tinydns recordmaker for DNSO.
 
 
 sub _default_ttl { 1800 }
+
+sub _serial_number {
+  return($ENV{DNS_OTERICA_SN} || $^T)
+}
 
 sub comment {
   my ($self, $comment) = @_;
@@ -51,7 +55,7 @@ sub _generic {
       $rec->{name},
       $if->[0],
       $rec->{ttl} || $self->_default_ttl,
-      $^T,
+      $self->_serial_number,
       $if->[1],
     ;
   }
@@ -87,7 +91,7 @@ sub ptr {
         $extended_arpa,
         $rec->{name},
         $rec->{ttl} || $self->_default_ttl,
-        $^T,
+        $self->_serial_number,
         $if->[1];
     }
     return @lines;
@@ -116,7 +120,7 @@ sub soa_and_ns_for_ip {
     $ns_1,
     $addr,
     $self->_default_ttl,
-    $^T,
+    $self->_serial_number,
     '',
   ;
 
@@ -159,7 +163,7 @@ sub mx {
       $mx_name,
       $rec->{dist} || 10,
       $rec->{ttl} || $self->_default_ttl,
-      $^T,
+      $self->_serial_number,
       $if->[1],
     ;
   }
@@ -181,7 +185,7 @@ sub domain {
     $rec->{ip} || '',
     $rec->{ns},
     $rec->{ttl} || $self->_default_ttl,
-    $^T,
+    $self->_serial_number,
     '',
   ;
 
@@ -198,7 +202,7 @@ sub soa_and_ns {
     $rec->{ns} || '',
     $rec->{node}->hub->soa_rname,
     $rec->{ttl} || $self->_default_ttl,
-    $^T,
+    $self->_serial_number,
     '',
   ;
 
@@ -216,7 +220,7 @@ sub cname {
     $rec->{cname},
     $rec->{domain} || '',
     $rec->{ttl} || $self->_default_ttl,
-    $^T,
+    $self->_serial_number,
     '',
   ;
 
@@ -232,7 +236,7 @@ sub txt {
     $rec->{node}->fqdn,
     $rec->{text},
     $rec->{ttl} || $self->_default_ttl,
-    $^T,
+    $self->_serial_number,
     '',
   ;
 
@@ -250,16 +254,12 @@ DNS::Oterica::RecordMaker::TinyDNS - a tinydns recordmaker for DNSO.
 
 =head1 VERSION
 
-version 0.092950
+version 0.100000
 
 =head1 DESCRIPTION
 
 This role provides logic for generating lines for the F<tinydns-data> program
 to consume.
-
-=cut
-
-=pod
 
 =head1 METHODS
 
@@ -267,10 +267,6 @@ to consume.
 
 Generate an C<=> line, the bread and butter A and PTR record pair for a
 hostname and IP.
-
-=cut
-
-=pod
 
 =head2 ptr
 
@@ -282,7 +278,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Ricardo SIGNES.
+This software is copyright (c) 2011 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
