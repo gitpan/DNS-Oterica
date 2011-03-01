@@ -1,6 +1,6 @@
 package DNS::Oterica::NodeFamily;
 BEGIN {
-  $DNS::Oterica::NodeFamily::VERSION = '0.100000';
+  $DNS::Oterica::NodeFamily::VERSION = '0.100001';
 }
 # ABSTRACT: a group of hosts that share common functions
 use Moose;
@@ -61,7 +61,7 @@ DNS::Oterica::NodeFamily - a group of hosts that share common functions
 
 =head1 VERSION
 
-version 0.100000
+version 0.100001
 
 =head1 ATTRIBUTES
 

@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package DNS::Oterica;
 BEGIN {
-  $DNS::Oterica::VERSION = '0.100000';
+  $DNS::Oterica::VERSION = '0.100001';
 }
 # ABSTRACT: build dns configuration more easily
 
@@ -18,7 +18,7 @@ DNS::Oterica - build dns configuration more easily
 
 =head1 VERSION
 
-version 0.100000
+version 0.100001
 
 =head1 OVERVIEW
 

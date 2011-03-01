@@ -1,6 +1,6 @@
 package DNS::Oterica::Location;
 BEGIN {
-  $DNS::Oterica::Location::VERSION = '0.100000';
+  $DNS::Oterica::Location::VERSION = '0.100001';
 }
 # ABSTRACT: a location at which hosts may reside
 use Moose;
@@ -46,7 +46,7 @@ DNS::Oterica::Location - a location at which hosts may reside
 
 =head1 VERSION
 
-version 0.100000
+version 0.100001
 
 =head1 OVERVIEW
 

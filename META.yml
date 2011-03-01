@@ -18,9 +18,7 @@ meta-spec:
 name: DNS-Oterica
 requires:
   File::Find::Rule: 0
-  File::Slurp: 0
   Getopt::Long::Descriptive: 0
-  IPC::System::Simple: 0
   Module::Pluggable: 0
   Moose: 0
   Moose::Role: 0
@@ -28,10 +26,9 @@ requires:
   Net::IP: 0
   Sub::Install: 0
   YAML::XS: 0
-  autodie: 0
 resources:
   repository: git://git.codesimply.com/DNS-Oterica.git
-version: 0.100000
+version: 0.100001
 x_Dist_Zilla:
   plugins:
     -
@@ -154,14 +151,6 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::Git::Push
       name: '@RJBS/@Git/Push'
       version: 1.110500
-    -
-      class: Dist::Zilla::Plugin::Prereqs
-      config:
-        Dist::Zilla::Plugin::Prereqs:
-          phase: runtime
-          type: requires
-      name: Prereqs
-      version: 4.200004
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
