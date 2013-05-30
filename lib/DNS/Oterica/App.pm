@@ -1,6 +1,6 @@
 package DNS::Oterica::App;
-BEGIN {
-  $DNS::Oterica::App::VERSION = '0.100001';
+{
+  $DNS::Oterica::App::VERSION = '0.200';
 }
 # ABSTRACT: the code behind `dnsoterica`
 
@@ -35,13 +35,13 @@ has root => (
   required => 1,
 );
 
-sub populate_locations {
+sub populate_networks {
   my ($self) = @_;
 
   my $root = $self->root;
-  for my $file (File::Find::Rule->file->in("$root/locations")) {
+  for my $file (File::Find::Rule->file->in("$root/networks")) {
     for my $data (YAML::XS::LoadFile($file)) {
-      $self->hub->add_location($data);
+      $self->hub->add_network($data);
     }
   }
 }
@@ -67,23 +67,25 @@ sub populate_domains {
 sub populate_hosts {
   my ($self) = @_;
   my $root = $self->root;
+  my $hub  = $self->hub;
+
   for my $file (File::Find::Rule->file->in("$root/hosts")) {
     for my $data (YAML::XS::LoadFile($file)) {
-      my $location = $self->hub->location($data->{location});
-
       my $interfaces;
       if (ref $data->{ip}) {
         $interfaces = [
           map {;
             [
-            $data->{ip}{$_} => $self->hub->location($_) ] 
+            $data->{ip}{$_} => $hub->network($_) ]
           } keys %{ $data->{ip}}
         ];
       } else {
-        $interfaces = [ [ $data->{ip} => $self->hub->location('world') ] ];
+        $interfaces = [
+          [ $data->{ip} => $hub->network( $hub->all_network_name ) ]
+        ];
       }
 
-      my $node = $self->hub->host(
+      my $node = $hub->host(
         $data->{domain},
         $data->{hostname},
         {
@@ -95,7 +97,7 @@ sub populate_hosts {
       );
 
       for my $name (@{ $data->{families} }) {
-        my $family = $self->hub->node_family($name);
+        my $family = $hub->node_family($name);
 
         $node->add_to_family($family);
       }
@@ -106,6 +108,7 @@ sub populate_hosts {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -114,7 +117,7 @@ DNS::Oterica::App - the code behind `dnsoterica`
 
 =head1 VERSION
 
-version 0.100001
+version 0.200
 
 =head1 ATTRIBUTES
 
@@ -135,10 +138,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

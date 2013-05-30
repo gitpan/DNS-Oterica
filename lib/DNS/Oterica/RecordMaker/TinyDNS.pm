@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 package DNS::Oterica::RecordMaker::TinyDNS;
-BEGIN {
-  $DNS::Oterica::RecordMaker::TinyDNS::VERSION = '0.100001';
+{
+  $DNS::Oterica::RecordMaker::TinyDNS::VERSION = '0.200';
 }
 # ABSTRACT: a tinydns recordmaker for DNSO.
 
@@ -13,36 +13,34 @@ sub _serial_number {
   return($ENV{DNS_OTERICA_SN} || $^T)
 }
 
+
 sub comment {
   my ($self, $comment) = @_;
 
   return "# $comment\n";
 }
 
+
+sub location {
+  my ($self, $location) = @_;
+
+  return if $location->code eq '';
+
+  Carp::confess("location codes must be two-character")
+    unless length $location->code == 2;
+
+  my @prefixes = $location->_class_prefixes;
+  map { sprintf "%%%s:%s\n", $location->code, $_ } @prefixes;
+}
+
 sub __ip_locode_pairs {
   my ($self, $rec) = @_;
 
-  if ($rec->{node} and $rec->{ip} || $rec->{loc}) {
-    Carp::confess('provide either a node or an ip/loc, not both');
-  }
-
-  if (not $rec->{node} || $rec->{ip}) {
-    Carp::confess('provide either a node or an ip/loc');
-  }
-
-  # This is what we'd do to emit one record per interface to implement a split
-  # horizon in the tinydns data file.  This is probably not what we want to end
-  # up doing.  -- rjbs, 2008-12-12
-  # return map {; [ $_->[0] => $_->[1]->code ] } $rec->{node}->interfaces
-  #   if $rec->{node};
+  Carp::confess('no node provided') unless $rec->{node};
 
   return
     map  {; [ $_->[0] => $_->[1]->code ] }
-    grep { $_->[1]->name eq 'world' }
-    $rec->{node}->interfaces
-    if $rec->{node};
-
-  return [ $rec->{ip}, $rec->{loc} || '' ];
+    $rec->{node}->interfaces;
 }
 
 sub _generic {
@@ -138,10 +136,6 @@ sub soa_and_ns_for_ip {
 sub a {
   my ($self, $rec) = @_;
   my @lines = $self->_generic(q{+}, $rec);
-
-  # if  $rec->{node}->hub->location($rec->{node}->location)->delegated) {
-  #   push @lines, $self->ptr($rec);
-  # }
 
   return @lines;
 }
@@ -246,6 +240,7 @@ sub txt {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -254,7 +249,7 @@ DNS::Oterica::RecordMaker::TinyDNS - a tinydns recordmaker for DNSO.
 
 =head1 VERSION
 
-version 0.100001
+version 0.200
 
 =head1 DESCRIPTION
 
@@ -262,6 +257,16 @@ This role provides logic for generating lines for the F<tinydns-data> program
 to consume.
 
 =head1 METHODS
+
+=head2 comment
+
+  my $line = $rec->comment("Hello, world!");
+
+This returns a line that is a one-line commment.
+
+=head2 location
+
+This returns a location line.
 
 =head2 a_and_ptr
 
@@ -278,10 +283,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

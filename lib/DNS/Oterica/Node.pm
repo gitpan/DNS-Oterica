@@ -1,6 +1,6 @@
 package DNS::Oterica::Node;
-BEGIN {
-  $DNS::Oterica::Node::VERSION = '0.100001';
+{
+  $DNS::Oterica::Node::VERSION = '0.200';
 }
 # ABSTRACT: DNSO node. belongs to families. 
 use Moose;
@@ -40,21 +40,14 @@ sub as_data_lines {
   return;
 }
 
-
-has hub => (
-  is  => 'ro',
-  isa => 'DNS::Oterica::Hub',
-  required => 1,
-  weak_ref => 1,
-  # handles  => 'DNS::Oterica::Role::RecordMaker',
-  handles  => [ qw(rec) ],
-);
+with 'DNS::Oterica::Role::HasHub';
 
 __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -63,7 +56,7 @@ DNS::Oterica::Node - DNSO node. belongs to families.
 
 =head1 VERSION
 
-version 0.100001
+version 0.200
 
 =head1 OVERVIEW
 
@@ -82,10 +75,6 @@ F<example.com>.
 =head2 families
 
 This is an arrayref of the families in which the node has been placed.
-
-=head2 hub
-
-This is the DNS::Oterica::Hub object into which the node was registered.
 
 =head1 METHODS
 
@@ -117,10 +106,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

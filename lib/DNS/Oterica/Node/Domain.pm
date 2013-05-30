@@ -1,6 +1,6 @@
 package DNS::Oterica::Node::Domain;
-BEGIN {
-  $DNS::Oterica::Node::Domain::VERSION = '0.100001';
+{
+  $DNS::Oterica::Node::Domain::VERSION = '0.200';
 }
 # ABSTRACT: a domain node
 use Moose;
@@ -14,6 +14,7 @@ no Moose;
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -22,7 +23,7 @@ DNS::Oterica::Node::Domain - a domain node
 
 =head1 VERSION
 
-version 0.100001
+version 0.200
 
 =head1 OVERVIEW
 
@@ -41,10 +42,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

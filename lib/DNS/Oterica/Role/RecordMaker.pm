@@ -1,6 +1,6 @@
 package DNS::Oterica::Role::RecordMaker;
-BEGIN {
-  $DNS::Oterica::Role::RecordMaker::VERSION = '0.100001';
+{
+  $DNS::Oterica::Role::RecordMaker::VERSION = '0.200';
 }
 use Moose::Role;
 # ABSTRACT: a delegation class for the DNSO recordmaker.
@@ -18,6 +18,7 @@ no Moose::Role;
 1
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -26,7 +27,7 @@ DNS::Oterica::Role::RecordMaker - a delegation class for the DNSO recordmaker.
 
 =head1 VERSION
 
-version 0.100001
+version 0.200
 
 =head1 DESCRIPTION
 
@@ -45,10 +46,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

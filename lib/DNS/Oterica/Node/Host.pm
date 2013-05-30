@@ -1,6 +1,6 @@
 package DNS::Oterica::Node::Host;
-BEGIN {
-  $DNS::Oterica::Node::Host::VERSION = '0.100001';
+{
+  $DNS::Oterica::Node::Host::VERSION = '0.200';
 }
 # ABSTRACT: a host node
 use Moose;
@@ -35,13 +35,6 @@ has location => (is => 'ro', isa => 'Str', required => 1);
 
 
 has ttl => (is => 'ro', isa => 'Int');
-
-
-sub world_ip {
-  my ($self) = @_;
-  my ($if) = grep { $_->[1]->name eq 'world' } $self->interfaces;
-  $if->[0];
-}
 
 
 sub fqdn {
@@ -90,6 +83,7 @@ no Moose;
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -98,13 +92,12 @@ DNS::Oterica::Node::Host - a host node
 
 =head1 VERSION
 
-version 0.100001
+version 0.200
 
 =head1 OVERVIEW
 
 C<DNS::Oterica::Node::Host> represents an individual machine in DNS::Oterica.
-A node has interfaces (which have IP addresses), a network location, and is
-part of a named domain.
+A node has interfaces (which have IP addresses) and is part of a named domain.
 
 =head1 ATTRIBUTES
 
@@ -120,7 +113,7 @@ The accessor returns a list.
 
 =head2 interfaces
 
-This is an arrayref of pairs, each one an IP address and a location.
+This is an arrayref of pairs, each one an IP address and a network.
 
 This attribute is pretty likely to change later.
 
@@ -136,10 +129,6 @@ it will be unset, and the default TTL is used.
 
 =head1 METHODS
 
-=head2 world_ip
-
-The C<world> location IP address for this host.
-
 =head2 fqdn
 
 This is the fully-qualified domain name of this host.
@@ -150,10 +139,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

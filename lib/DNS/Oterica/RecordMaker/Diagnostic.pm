@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 package DNS::Oterica::RecordMaker::Diagnostic;
-BEGIN {
-  $DNS::Oterica::RecordMaker::Diagnostic::VERSION = '0.100001';
+{
+  $DNS::Oterica::RecordMaker::Diagnostic::VERSION = '0.200';
 }
 # ABSTRACT: a collector of record generation requests, for testing
 
@@ -36,6 +36,7 @@ for my $type (@types) {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -44,7 +45,7 @@ DNS::Oterica::RecordMaker::Diagnostic - a collector of record generation request
 
 =head1 VERSION
 
-version 0.100001
+version 0.200
 
 =head1 DESCRIPTION
 
@@ -59,10 +60,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

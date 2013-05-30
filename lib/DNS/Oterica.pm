@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 package DNS::Oterica;
-BEGIN {
-  $DNS::Oterica::VERSION = '0.100001';
+{
+  $DNS::Oterica::VERSION = '0.200';
 }
 # ABSTRACT: build dns configuration more easily
 
@@ -10,6 +10,7 @@ BEGIN {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -18,7 +19,7 @@ DNS::Oterica - build dns configuration more easily
 
 =head1 VERSION
 
-version 0.100001
+version 0.200
 
 =head1 OVERVIEW
 
@@ -62,12 +63,10 @@ not yet exist.
 
 There's a lot of stuff to do.
 
- * determine location automatically based on IP
- * reject IPs that do not match a location
+ * determine location automatically based on world IP
  * look into replacing nodefamily behavior with Moose roles
  * rewrite tests to use Diagnostic recordmaker
  * thorough tests for TinyDNS recordmaker
- * handle split horizons
  * simpler method to say "being in family X implies being in Y"
  * means to replace Module::Pluggable with list of families to register
  * means to track concepts like virts/zones, zonehosts, per-host interfaces
@@ -78,10 +77,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
