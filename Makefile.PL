@@ -31,6 +31,7 @@ my %WriteMakefileArgs = (
     "Net::IP" => 0,
     "Sub::Install" => 0,
     "YAML::XS" => 0,
+    "lib" => 0,
     "namespace::autoclean" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -43,7 +44,7 @@ my %WriteMakefileArgs = (
     "Test::More" => "0.96",
     "autodie" => 0
   },
-  "VERSION" => "0.200",
+  "VERSION" => "0.201",
   "test" => {
     "TESTS" => "t/*.t"
   }

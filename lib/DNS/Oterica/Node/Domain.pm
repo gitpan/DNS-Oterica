@@ -1,6 +1,6 @@
 package DNS::Oterica::Node::Domain;
 {
-  $DNS::Oterica::Node::Domain::VERSION = '0.200';
+  $DNS::Oterica::Node::Domain::VERSION = '0.201';
 }
 # ABSTRACT: a domain node
 use Moose;
@@ -23,7 +23,7 @@ DNS::Oterica::Node::Domain - a domain node
 
 =head1 VERSION
 
-version 0.200
+version 0.201
 
 =head1 OVERVIEW
 

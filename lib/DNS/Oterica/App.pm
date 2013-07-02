@@ -1,6 +1,6 @@
 package DNS::Oterica::App;
 {
-  $DNS::Oterica::App::VERSION = '0.200';
+  $DNS::Oterica::App::VERSION = '0.201';
 }
 # ABSTRACT: the code behind `dnsoterica`
 
@@ -117,7 +117,7 @@ DNS::Oterica::App - the code behind `dnsoterica`
 
 =head1 VERSION
 
-version 0.200
+version 0.201
 
 =head1 ATTRIBUTES
 

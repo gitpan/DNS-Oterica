@@ -1,6 +1,6 @@
 package DNS::Oterica::Role::HasHub;
 {
-  $DNS::Oterica::Role::HasHub::VERSION = '0.200';
+  $DNS::Oterica::Role::HasHub::VERSION = '0.201';
 }
 use Moose::Role;
 
@@ -27,7 +27,7 @@ DNS::Oterica::Role::HasHub
 
 =head1 VERSION
 
-version 0.200
+version 0.201
 
 =head1 AUTHOR
 

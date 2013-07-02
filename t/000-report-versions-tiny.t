@@ -65,6 +65,7 @@ eval { $v .= pmver('Test::More','0.96') };
 eval { $v .= pmver('Test::Pod','1.41') };
 eval { $v .= pmver('YAML::XS','any version') };
 eval { $v .= pmver('autodie','any version') };
+eval { $v .= pmver('lib','any version') };
 eval { $v .= pmver('namespace::autoclean','any version') };
 eval { $v .= pmver('strict','any version') };
 eval { $v .= pmver('version','0.9901') };
