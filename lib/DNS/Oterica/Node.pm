@@ -1,6 +1,6 @@
 package DNS::Oterica::Node;
 {
-  $DNS::Oterica::Node::VERSION = '0.201';
+  $DNS::Oterica::Node::VERSION = '0.202';
 }
 # ABSTRACT: DNSO node. belongs to families. 
 use Moose;
@@ -50,13 +50,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 DNS::Oterica::Node - DNSO node. belongs to families. 
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 OVERVIEW
 

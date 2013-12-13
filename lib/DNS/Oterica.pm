@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package DNS::Oterica;
 {
-  $DNS::Oterica::VERSION = '0.201';
+  $DNS::Oterica::VERSION = '0.202';
 }
 # ABSTRACT: build dns configuration more easily
 
@@ -13,13 +13,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 DNS::Oterica - build dns configuration more easily
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 OVERVIEW
 

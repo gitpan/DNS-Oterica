@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package DNS::Oterica::RecordMaker::Diagnostic;
 {
-  $DNS::Oterica::RecordMaker::Diagnostic::VERSION = '0.201';
+  $DNS::Oterica::RecordMaker::Diagnostic::VERSION = '0.202';
 }
 # ABSTRACT: a collector of record generation requests, for testing
 
@@ -39,13 +39,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 DNS::Oterica::RecordMaker::Diagnostic - a collector of record generation requests, for testing
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 DESCRIPTION
 

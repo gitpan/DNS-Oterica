@@ -1,6 +1,6 @@
 package DNS::Oterica::Node::Host;
 {
-  $DNS::Oterica::Node::Host::VERSION = '0.201';
+  $DNS::Oterica::Node::Host::VERSION = '0.202';
 }
 # ABSTRACT: a host node
 use Moose;
@@ -86,13 +86,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 DNS::Oterica::Node::Host - a host node
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 OVERVIEW
 

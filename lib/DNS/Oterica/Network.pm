@@ -1,6 +1,6 @@
 package DNS::Oterica::Network;
 {
-  $DNS::Oterica::Network::VERSION = '0.201';
+  $DNS::Oterica::Network::VERSION = '0.202';
 }
 # ABSTRACT: a network to which results are served
 use Moose;
@@ -65,13 +65,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 DNS::Oterica::Network - a network to which results are served
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 OVERVIEW
 

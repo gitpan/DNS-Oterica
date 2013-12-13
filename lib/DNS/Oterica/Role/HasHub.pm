@@ -1,8 +1,9 @@
 package DNS::Oterica::Role::HasHub;
 {
-  $DNS::Oterica::Role::HasHub::VERSION = '0.201';
+  $DNS::Oterica::Role::HasHub::VERSION = '0.202';
 }
 use Moose::Role;
+# ABSTRACT: any part of the dnso system that has a reference to the hub
 
 use namespace::autoclean;
 
@@ -21,13 +22,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
-DNS::Oterica::Role::HasHub
+DNS::Oterica::Role::HasHub - any part of the dnso system that has a reference to the hub
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 AUTHOR
 

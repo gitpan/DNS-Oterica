@@ -1,6 +1,6 @@
 package DNS::Oterica::Hub;
 {
-  $DNS::Oterica::Hub::VERSION = '0.201';
+  $DNS::Oterica::Hub::VERSION = '0.202';
 }
 # ABSTRACT: the center of control for a DNS::Oterica system
 
@@ -188,13 +188,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 DNS::Oterica::Hub - the center of control for a DNS::Oterica system
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 OVERVIEW
 
