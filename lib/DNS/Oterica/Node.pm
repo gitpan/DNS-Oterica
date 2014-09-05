@@ -1,18 +1,44 @@
 package DNS::Oterica::Node;
-{
-  $DNS::Oterica::Node::VERSION = '0.202';
-}
 # ABSTRACT: DNSO node. belongs to families. 
+$DNS::Oterica::Node::VERSION = '0.203';
 use Moose;
 
 use DNS::Oterica::Role::RecordMaker;
 
+#pod =head1 OVERVIEW
+#pod
+#pod A node is any part of a network, either a domain or a node.  It is a member of
+#pod zero or more families.
+#pod
+#pod Like other DNS::Oterica objects, they should be created through the hub.
+#pod
+#pod =attr domain
+#pod
+#pod This is a string representing the domain's domain name, for example
+#pod F<example.com>.
+#pod
+#pod =cut
 
 has domain   => (is => 'ro', isa => 'Str', required => 1);
 
+#pod =attr families
+#pod
+#pod This is an arrayref of the families in which the node has been placed.
+#pod
+#pod =cut
 
 has families => (is => 'ro', isa => 'ArrayRef', default => sub { [] });
 
+#pod =method add_to_family
+#pod
+#pod   $node->add_to_family($family);
+#pod
+#pod This method adds the node to the given family, which may be given either as an
+#pod object or as a name.
+#pod
+#pod If the node is already in the family, nothing happens.
+#pod
+#pod =cut
 
 sub add_to_family {
   my ($self, $family) = @_;
@@ -22,6 +48,14 @@ sub add_to_family {
   push @{ $self->families }, $family;
 }
 
+#pod =method in_node_family
+#pod
+#pod   if ($node->in_node_family($family)) { ... }
+#pod
+#pod This method returns true if the node is a member of the named (or passed)
+#pod family and false otherwise.
+#pod
+#pod =cut
 
 sub in_node_family {
   my ($self, $family) = @_;
@@ -34,6 +68,13 @@ sub in_node_family {
   return;
 }
 
+#pod =method as_data_lines
+#pod
+#pod This method returns a list of lines of configuration output.
+#pod
+#pod By default, it returns nothing.
+#pod
+#pod =cut
 
 sub as_data_lines {
   confess 'do not call ->as_data_lines in non-list context' unless wantarray;
@@ -58,7 +99,7 @@ DNS::Oterica::Node - DNSO node. belongs to families.
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 OVERVIEW
 
@@ -108,7 +149,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

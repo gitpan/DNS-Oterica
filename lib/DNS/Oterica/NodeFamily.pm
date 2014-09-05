@@ -1,10 +1,13 @@
 package DNS::Oterica::NodeFamily;
-{
-  $DNS::Oterica::NodeFamily::VERSION = '0.202';
-}
 # ABSTRACT: a group of hosts that share common functions
+$DNS::Oterica::NodeFamily::VERSION = '0.203';
 use Moose;
 
+#pod =attr nodes
+#pod
+#pod This is an arrayref of the node objects that are in this family.
+#pod
+#pod =cut
 
 has nodes => (
   isa => 'ArrayRef',
@@ -17,6 +20,13 @@ has nodes => (
   },
 );
 
+#pod =method add_node
+#pod
+#pod   $family->add_node($node);
+#pod
+#pod This adds the given node to the family.
+#pod
+#pod =cut
 
 # XXX: do not allow dupes -- rjbs, 2009-09-11
 sub add_node {
@@ -25,6 +35,13 @@ sub add_node {
   $self->_push_node( $node );
 }
 
+#pod =method as_data_lines
+#pod
+#pod This method returns a list of lines of configuration.  By default it only
+#pod generates begin and end marking comments.  This method is meant to be augmented
+#pod by subclasses.
+#pod
+#pod =cut
 
 sub as_data_lines {
   my ($self) = @_;
@@ -56,7 +73,7 @@ DNS::Oterica::NodeFamily - a group of hosts that share common functions
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 ATTRIBUTES
 
@@ -84,7 +101,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

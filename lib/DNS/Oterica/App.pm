@@ -1,14 +1,16 @@
 package DNS::Oterica::App;
-{
-  $DNS::Oterica::App::VERSION = '0.202';
-}
 # ABSTRACT: the code behind `dnsoterica`
-
+$DNS::Oterica::App::VERSION = '0.203';
 use Moose;
 use DNS::Oterica::Hub;
 use File::Find::Rule;
 use YAML::XS ();
 
+#pod =attr hub
+#pod
+#pod This is the L<DNS::Oterica::Hub> into which entries will be loaded.
+#pod
+#pod =cut
 
 has hub => (
   is   => 'ro',
@@ -29,6 +31,14 @@ sub BUILD {
   }
 }
 
+#pod =attr root
+#pod
+#pod This is a directory in which F<dnsoterica> will look for configuration files.
+#pod
+#pod It will look in the subdirectory F<domains> for domain definitions and F<hosts>
+#pod for hosts.
+#pod
+#pod =cut
 
 has root => (
   is       => 'ro',
@@ -119,7 +129,7 @@ DNS::Oterica::App - the code behind `dnsoterica`
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 ATTRIBUTES
 
@@ -140,7 +150,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

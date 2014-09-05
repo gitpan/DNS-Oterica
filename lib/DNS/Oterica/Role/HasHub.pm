@@ -1,9 +1,7 @@
 package DNS::Oterica::Role::HasHub;
-{
-  $DNS::Oterica::Role::HasHub::VERSION = '0.202';
-}
-use Moose::Role;
 # ABSTRACT: any part of the dnso system that has a reference to the hub
+$DNS::Oterica::Role::HasHub::VERSION = '0.203';
+use Moose::Role;
 
 use namespace::autoclean;
 
@@ -30,7 +28,7 @@ DNS::Oterica::Role::HasHub - any part of the dnso system that has a reference to
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 AUTHOR
 
@@ -38,7 +36,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

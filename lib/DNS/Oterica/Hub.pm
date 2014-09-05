@@ -1,9 +1,6 @@
 package DNS::Oterica::Hub;
-{
-  $DNS::Oterica::Hub::VERSION = '0.202';
-}
 # ABSTRACT: the center of control for a DNS::Oterica system
-
+$DNS::Oterica::Hub::VERSION = '0.203';
 use Moose;
 with 'DNS::Oterica::Role::RecordMaker';
 
@@ -15,6 +12,13 @@ use DNS::Oterica::Node::Domain;
 use DNS::Oterica::Node::Host;
 use DNS::Oterica::NodeFamily;
 
+#pod =head1 OVERVIEW
+#pod
+#pod The hub is the central collector of DNS::Oterica data.  All new entries are
+#pod given to the hub to collect.  The hub takes care of preventing duplicates and
+#pod keeping data synchronized.
+#pod
+#pod =cut
 
 has [ qw(_domain_registry _net_registry _node_family_registry) ] => (
   is  => 'ro',
@@ -23,6 +27,12 @@ has [ qw(_domain_registry _net_registry _node_family_registry) ] => (
   default  => sub { {} },
 );
 
+#pod =attr ns_family
+#pod
+#pod This is the name of the family whose hosts will be used for NS records for
+#pod hosts and in SOA lines.
+#pod
+#pod =cut
 
 has ns_family => (
   is  => 'ro',
@@ -30,6 +40,11 @@ has ns_family => (
   required => 1,
 );
 
+#pod =attr hostmaster
+#pod
+#pod This is the email address to be used as the contact point in SOA lines.
+#pod
+#pod =cut
 
 has hostmaster => (
   is  => 'ro',
@@ -74,6 +89,20 @@ sub BUILD {
   });
 }
 
+#pod =method domain
+#pod
+#pod   my $new_domain = $hub->domain($name => \%arg);
+#pod
+#pod   my $domain = $hub->domain($name);
+#pod
+#pod This method will return a domain found by name, or if C<\%arg> is given, will
+#pod create a new domain.
+#pod
+#pod If no domain is found and C<\%arg> is not given, an exception is raised.
+#pod
+#pod If C<\%arg> is given for a domain that already exists, an exception is raised.
+#pod
+#pod =cut
 
 sub domain {
   my ($self, $name, $arg) = @_;
@@ -91,18 +120,39 @@ sub domain {
   });
 }
 
+#pod =method network
+#pod
+#pod   my $net = $hub->network($name);
+#pod
+#pod This method finds the named network and returns it.  If no network for the
+#pod given name is registered, an exception is raised.
+#pod
+#pod =cut
 
 sub network {
   my ($self, $name) = @_;
   return $self->_net_registry->{$name} || confess "no such network '$name'";
 }
 
+#pod =method networks
+#pod
+#pod   my @net = $hub->networks;
+#pod
+#pod =cut
 
 sub networks {
   my ($self) = @_;
   return values %{ $self->_net_registry };
 }
 
+#pod =method add_network
+#pod
+#pod   my $net = $hub->add_network(\%arg);
+#pod
+#pod This registers a new network, raising an exception if one already exists for
+#pod the given name.
+#pod
+#pod =cut
 
 sub add_network {
   my ($self, $arg) = @_;
@@ -137,6 +187,15 @@ sub add_network {
   $self->_net_registry->{$name} = $net;
 }
 
+#pod =method host
+#pod
+#pod   my $host = $hub->host($domain_name, $hostname);
+#pod
+#pod   my $new_host = $hub->host($domain_name, $hostname, \%arg);
+#pod
+#pod This method will find or create a host, much like the C<L</domain>> method.
+#pod
+#pod =cut
 
 sub host {
   my ($self, $domain_name, $name, $arg) = @_;
@@ -153,6 +212,13 @@ sub host {
   });
 }
 
+#pod =method nodes
+#pod
+#pod This method will return a list of all nodes registered with the system.
+#pod
+#pod B<Warning>: at present this will return only hosts.
+#pod
+#pod =cut
 
 sub nodes {
   my ($self) = @_;
@@ -166,6 +232,14 @@ sub nodes {
   return @nodes;
 }
 
+#pod =method node_family
+#pod
+#pod   my $family = $hub->node_family($family_name);
+#pod
+#pod This method will return the named familiy.  If no such family exists, an
+#pod exception will be raised.
+#pod
+#pod =cut
 
 sub node_family {
   my ($self, $name) = @_;
@@ -174,6 +248,14 @@ sub node_family {
       || confess "unknown family $name";
 }
 
+#pod =method node_families
+#pod
+#pod   my @families = $hub->node_families;
+#pod
+#pod This method will return all node families.  (These are set up during hub
+#pod initialization.)
+#pod
+#pod =cut
 
 sub node_families {
   my ($self) = @_;
@@ -196,7 +278,7 @@ DNS::Oterica::Hub - the center of control for a DNS::Oterica system
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 OVERVIEW
 
@@ -282,7 +364,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

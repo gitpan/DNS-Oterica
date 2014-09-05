@@ -1,8 +1,6 @@
 package DNS::Oterica::Network;
-{
-  $DNS::Oterica::Network::VERSION = '0.202';
-}
 # ABSTRACT: a network to which results are served
+$DNS::Oterica::Network::VERSION = '0.203';
 use Moose;
 
 use Net::IP;
@@ -17,9 +15,26 @@ coerce 'DNS::Oterica::Type::Network'
   => from 'Str'
   => via { Net::IP->new($_) || confess( Net::IP::Error() ) };
 
+#pod =head1 OVERVIEW
+#pod
+#pod Networks are IP networks to which results are served, and can be used to
+#pod implement split horizons.
+#pod
+#pod Like other DNS::Oterica objects, they should be created through the hub.
+#pod
+#pod =attr name
+#pod
+#pod This is the network's unique name.
+#pod
+#pod =cut
 
 has name => (is => 'ro', isa => 'Str', required => 1);
 
+#pod =attr subnet
+#pod
+#pod This is the C<Net::IP> range for the network at this network.
+#pod
+#pod =cut
 
 has subnet => (
   is   => 'ro',
@@ -73,7 +88,7 @@ DNS::Oterica::Network - a network to which results are served
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 OVERVIEW
 
@@ -98,7 +113,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

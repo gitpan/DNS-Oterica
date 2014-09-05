@@ -1,11 +1,59 @@
 use strict;
 use warnings;
 package DNS::Oterica;
-{
-  $DNS::Oterica::VERSION = '0.202';
-}
 # ABSTRACT: build dns configuration more easily
-
+$DNS::Oterica::VERSION = '0.203';
+#pod =head1 WARNING
+#pod
+#pod B<HIGHLY EXPERIMENTAL>
+#pod
+#pod This code is really not stable yet.  We're using it, and we're going to feel
+#pod free to make incompatible changes to it whenever we want.  Eventually, that
+#pod might change and we will reach a much stabler release cycle.
+#pod
+#pod This code has been released so that you can see what it does, use it
+#pod cautiously, and help guide it toward a stable feature set.
+#pod
+#pod =head1 OVERVIEW
+#pod
+#pod DNS::Oterica is a system for generating DNS server configuration based on
+#pod system definitions and role-based plugins.  You need to provide a few things:
+#pod
+#pod =head2 domain definitions
+#pod
+#pod Domains are groups of hosts.  You know, domains.  This is a DNS tool.  If you
+#pod don't know what a domain is, you're in the wrong place.
+#pod
+#pod =head2 host definitions
+#pod
+#pod A host is a box with one or more interfaces.  It is part of a domain, it has a
+#pod hostname and maybe some aliases.  It's a member of zero or more node groups.
+#pod
+#pod =head2 node families
+#pod
+#pod Nodes (both hosts and domains) can be parts of families.  Families are groups
+#pod of behavior that nodes perform.  A family object is instantiated for each
+#pod family, and once all nodes have been added to the DNS::Oterica hub, the family
+#pod can emit more configuration.
+#pod
+#pod =head1 I WANT TO KNOW MORE
+#pod
+#pod Please read L<DNS::Oterica::Tutorial|DNS::Oterica::Tutorial>, which may or may
+#pod not yet exist.
+#pod
+#pod =head1 TODO
+#pod
+#pod There's a lot of stuff to do.
+#pod
+#pod  * determine location automatically based on world IP
+#pod  * look into replacing nodefamily behavior with Moose roles
+#pod  * rewrite tests to use Diagnostic recordmaker
+#pod  * thorough tests for TinyDNS recordmaker
+#pod  * simpler method to say "being in family X implies being in Y"
+#pod  * means to replace Module::Pluggable with list of families to register
+#pod  * means to track concepts like virts/zones, zonehosts, per-host interfaces
+#pod
+#pod =cut
 
 1;
 
@@ -21,7 +69,7 @@ DNS::Oterica - build dns configuration more easily
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 OVERVIEW
 
@@ -79,7 +127,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

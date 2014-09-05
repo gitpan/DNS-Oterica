@@ -1,11 +1,14 @@
 use strict;
 use warnings;
 package DNS::Oterica::RecordMaker::TinyDNS;
-{
-  $DNS::Oterica::RecordMaker::TinyDNS::VERSION = '0.202';
-}
 # ABSTRACT: a tinydns recordmaker for DNSO.
-
+$DNS::Oterica::RecordMaker::TinyDNS::VERSION = '0.203';
+#pod =head1 DESCRIPTION
+#pod
+#pod This role provides logic for generating lines for the F<tinydns-data> program
+#pod to consume.
+#pod
+#pod =cut
 
 sub _default_ttl { 1800 }
 
@@ -13,6 +16,13 @@ sub _serial_number {
   return($ENV{DNS_OTERICA_SN} || $^T)
 }
 
+#pod =method comment
+#pod
+#pod   my $line = $rec->comment("Hello, world!");
+#pod
+#pod This returns a line that is a one-line commment.
+#pod
+#pod =cut
 
 sub comment {
   my ($self, $comment) = @_;
@@ -20,6 +30,11 @@ sub comment {
   return "# $comment\n";
 }
 
+#pod =method location
+#pod
+#pod This returns a location line.
+#pod
+#pod =cut
 
 sub location {
   my ($self, $location) = @_;
@@ -61,6 +76,12 @@ sub _generic {
   return @lines;
 }
 
+#pod =method a_and_ptr
+#pod
+#pod Generate an C<=> line, the bread and butter A and PTR record pair for a
+#pod hostname and IP.
+#pod
+#pod =cut
 
 # =fqdn:ip:ttl:timestamp:lo
 sub a_and_ptr {
@@ -72,6 +93,11 @@ sub a_and_ptr {
   );
 }
 
+#pod =method ptr
+#pod
+#pod Generate an C<^> line, for the reverse DNS of an IP address.
+#pod
+#pod =cut
 
 # ^fqdn:ip:ttl:timestamp:lo
 # can't use __generic here because it wants to look at interfaces, and we want
@@ -83,14 +109,16 @@ sub ptr {
     for my $if ($self->__ip_locode_pairs($rec)) {
       my $ip = $if->[0];
       my @bytes = reverse split /\./, $ip;
-      splice @bytes, 1, 1, '0-24', $bytes[1];
+
+      splice @bytes, 1, 1, '0-24', $bytes[1] unless $bytes[-1] eq '10';
+
       my $extended_arpa = join '.', @bytes, 'in-addr', 'arpa';
       push @lines, sprintf "^%s:%s:%s:%s:%s\n",
         $extended_arpa,
         $rec->{name},
         $rec->{ttl} || $self->_default_ttl,
         $self->_serial_number,
-        $if->[1];
+        $if->[1] eq 'FB' ? '' : $if->[1];
     }
     return @lines;
 }
@@ -153,7 +181,7 @@ sub mx {
   for my $if ($self->__ip_locode_pairs($rec)) {
     push @lines, sprintf "@%s:%s:%s:%s:%s:%s:%s\n",
       $rec->{name},
-      $if->[0],
+      ($rec->{no_ip} ? '' : $if->[0]),
       $mx_name,
       $rec->{dist} || 10,
       $rec->{ttl} || $self->_default_ttl,
@@ -225,9 +253,15 @@ sub txt {
   my ($self, $rec) = @_;
   my @lines;
 
+  my $name = $rec->{name};
+  $name = $rec->{node}->fqdn if ! $name && $rec->{node};
+
+  Carp::confess("no record name or node given for txt record")
+    unless defined $name and length $name;
+
   # 'fqdn:s:ttl:timestamp:lo
   push @lines, sprintf qq{'%s:%s:%s:%s:%s\n},
-    $rec->{node}->fqdn,
+    $name,
     $rec->{text},
     $rec->{ttl} || $self->_default_ttl,
     $self->_serial_number,
@@ -251,7 +285,7 @@ DNS::Oterica::RecordMaker::TinyDNS - a tinydns recordmaker for DNSO.
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 DESCRIPTION
 
@@ -285,7 +319,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,11 +1,19 @@
 package DNS::Oterica::Node::Domain;
-{
-  $DNS::Oterica::Node::Domain::VERSION = '0.202';
-}
 # ABSTRACT: a domain node
+$DNS::Oterica::Node::Domain::VERSION = '0.203';
 use Moose;
 extends 'DNS::Oterica::Node';
 
+#pod =head1 OVERVIEW
+#pod
+#pod DNS::Oterica::Node::Domain represents a domain name in DNS::Oterica. Domains
+#pod have hosts.
+#pod
+#pod =method fqdn
+#pod
+#pod The fully qualified domain name for this domain.
+#pod
+#pod =cut
 
 sub fqdn { $_[0]->domain; }
 
@@ -25,7 +33,7 @@ DNS::Oterica::Node::Domain - a domain node
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 OVERVIEW
 
@@ -44,7 +52,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
