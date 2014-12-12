@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package DNS::Oterica::RecordMaker::TinyDNS;
 # ABSTRACT: a tinydns recordmaker for DNSO.
-$DNS::Oterica::RecordMaker::TinyDNS::VERSION = '0.203';
+$DNS::Oterica::RecordMaker::TinyDNS::VERSION = '0.204';
 #pod =head1 DESCRIPTION
 #pod
 #pod This role provides logic for generating lines for the F<tinydns-data> program
@@ -271,6 +271,75 @@ sub txt {
   return @lines;
 }
 
+sub _escaped_octals {
+  join q{}, map {; sprintf '\\%03o', ord } split //, pack 'n', $_[0];
+}
+
+sub _hostname_to_labels {
+  my @labels = split /\./, $_[0];
+  my $str = '';
+  $str .= sprintf('\\%03o', length) . $_ for @labels;
+  $str .= '\000';
+
+  return $str;
+}
+
+#pod =method srv
+#pod
+#pod   @lines = $rec->srv({
+#pod     # We want to produce _finger._tcp.example.com for port 70
+#pod     domain    => 'example.com',
+#pod     service   => 'finger',
+#pod     protocol  => 'tcp',
+#pod     target    => 'f.example.com',
+#pod     port      => 70,
+#pod
+#pod     priority  => 10,
+#pod     weight    => 20,
+#pod   });
+#pod
+#pod This returns lines for SRV records following RFC 2782.  It takes the following
+#pod arguments:
+#pod
+#pod   domain    - the domain offering service
+#pod   service   - the well-known service name (http, imaps, finger)
+#pod   protocol  - tcp or udp
+#pod
+#pod   target    - the host providing service
+#pod   port      - the port the service listens on
+#pod
+#pod   priority  - numeric priority; lower numbers should be used first
+#pod   weight    - weight to break priority ties; higher numbers preferred
+#pod
+#pod =cut
+
+sub srv {
+  my ($self, $rec) = @_;
+
+  Carp::confess("srv record with no target! use empty string for null target")
+    unless defined $rec->{location};
+
+  Carp::confess("srv record with no port!")
+    unless defined $rec->{port};
+
+  my $priority = $rec->{priority} || 0;
+  my $weight   = $rec->{weight}   || 0;
+
+  my @lines;
+  push @lines, sprintf ":_%s._%s.%s:33:%s%s%s%s:%s:%s\n",
+    $rec->{service},
+    $rec->{protocol} || 'tcp',
+    $rec->{domain},
+    _escaped_octals($priority),
+    _escaped_octals($weight),
+    _escaped_octals($rec->{port}),
+    _hostname_to_labels($rec->{target}),
+    $rec->{ttl} || $self->_default_ttl,
+    $rec->{location} || '';
+
+  return @lines;
+}
+
 1;
 
 __END__
@@ -285,7 +354,7 @@ DNS::Oterica::RecordMaker::TinyDNS - a tinydns recordmaker for DNSO.
 
 =head1 VERSION
 
-version 0.203
+version 0.204
 
 =head1 DESCRIPTION
 
@@ -312,6 +381,33 @@ hostname and IP.
 =head2 ptr
 
 Generate an C<^> line, for the reverse DNS of an IP address.
+
+=head2 srv
+
+  @lines = $rec->srv({
+    # We want to produce _finger._tcp.example.com for port 70
+    domain    => 'example.com',
+    service   => 'finger',
+    protocol  => 'tcp',
+    target    => 'f.example.com',
+    port      => 70,
+
+    priority  => 10,
+    weight    => 20,
+  });
+
+This returns lines for SRV records following RFC 2782.  It takes the following
+arguments:
+
+  domain    - the domain offering service
+  service   - the well-known service name (http, imaps, finger)
+  protocol  - tcp or udp
+
+  target    - the host providing service
+  port      - the port the service listens on
+
+  priority  - numeric priority; lower numbers should be used first
+  weight    - weight to break priority ties; higher numbers preferred
 
 =head1 AUTHOR
 
