@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package DNS::Oterica::RecordMaker::TinyDNS;
 # ABSTRACT: a tinydns recordmaker for DNSO.
-$DNS::Oterica::RecordMaker::TinyDNS::VERSION = '0.204';
+$DNS::Oterica::RecordMaker::TinyDNS::VERSION = '0.205';
 #pod =head1 DESCRIPTION
 #pod
 #pod This role provides logic for generating lines for the F<tinydns-data> program
@@ -317,10 +317,12 @@ sub srv {
   my ($self, $rec) = @_;
 
   Carp::confess("srv record with no target! use empty string for null target")
-    unless defined $rec->{location};
+    unless defined $rec->{target};
 
-  Carp::confess("srv record with no port!")
-    unless defined $rec->{port};
+  for my $needed (qw(port service domain)) {
+    Carp::confess("tried to make srv record with no $needed!")
+      unless defined $rec->{$needed};
+  }
 
   my $priority = $rec->{priority} || 0;
   my $weight   = $rec->{weight}   || 0;
@@ -354,7 +356,7 @@ DNS::Oterica::RecordMaker::TinyDNS - a tinydns recordmaker for DNSO.
 
 =head1 VERSION
 
-version 0.204
+version 0.205
 
 =head1 DESCRIPTION
 

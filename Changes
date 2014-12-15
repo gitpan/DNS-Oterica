@@ -1,5 +1,8 @@
 Revision history for DNS-Oterica
 
+0.205     2014-12-15 09:37:04-05:00 America/New_York
+        - fix broken validation of SRV records with no target
+
 0.204     2014-12-12 17:06:48-05:00 America/New_York
         - add ->srv to recordmaker
 

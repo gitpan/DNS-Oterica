@@ -1,6 +1,6 @@
 package DNS::Oterica::Network;
 # ABSTRACT: a network to which results are served
-$DNS::Oterica::Network::VERSION = '0.204';
+$DNS::Oterica::Network::VERSION = '0.205';
 use Moose;
 
 use Net::IP;
@@ -88,7 +88,7 @@ DNS::Oterica::Network - a network to which results are served
 
 =head1 VERSION
 
-version 0.204
+version 0.205
 
 =head1 OVERVIEW
 

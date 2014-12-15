@@ -1,6 +1,6 @@
 package DNS::Oterica::App;
 # ABSTRACT: the code behind `dnsoterica`
-$DNS::Oterica::App::VERSION = '0.204';
+$DNS::Oterica::App::VERSION = '0.205';
 use Moose;
 use DNS::Oterica::Hub;
 use File::Find::Rule;
@@ -129,7 +129,7 @@ DNS::Oterica::App - the code behind `dnsoterica`
 
 =head1 VERSION
 
-version 0.204
+version 0.205
 
 =head1 ATTRIBUTES
 
